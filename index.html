@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎂 Happy Birthday 菲艳！🎂</title>
+<!-- 纯离线字体，无需任何网络 -->
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --pink: #ff6b9d; --purple: #c471ed; --peach: #ffecd2;
+    --mint: #a8edea; --yellow: #ffd76e; --sky: #89cffd; --white: #fff;
+  }
+  body {
+    min-height: 100vh; overflow-x: hidden;
+    font-family: -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 25%, #ff9a9e 50%, #fad0c4 75%, #ffecd2 100%);
+    background-size: 400% 400%; animation: gradientShift 8s ease infinite;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='24' font-size='24'>🐾</text></svg>") 16 16, auto;
+  }
+  @keyframes gradientShift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+
+  /* ===== RICH BACKGROUND LAYER ===== */
+  .bg-layer {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+  }
+  /* Soft bokeh circles */
+  .bokeh {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.25), transparent 70%);
+    animation: bokehFloat 12s ease-in-out infinite alternate;
+  }
+  @keyframes bokehFloat {
+    0% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.1); }
+    100% { transform: translateY(10px) scale(0.95); }
+  }
+  /* Kawaii clouds */
+  .cloud {
+    position: absolute; background: rgba(255,255,255,0.4);
+    border-radius: 50px; animation: cloudDrift linear infinite;
+    box-shadow: 0 5px 15px rgba(255,182,193,0.15);
+  }
+  .cloud::before, .cloud::after {
+    content: ''; position: absolute; background: rgba(255,255,255,0.4); border-radius: 50%;
+  }
+  .cloud::before { width: 60%; height: 130%; top: -50%; left: 15%; }
+  .cloud::after { width: 45%; height: 110%; top: -30%; right: 15%; }
+  @keyframes cloudDrift {
+    from { transform: translateX(-200px); }
+    to { transform: translateX(calc(100vw + 200px)); }
+  }
+  /* Floating hearts */
+  .float-heart {
+    position: absolute; color: rgba(255,107,157,0.2);
+    animation: heartRise linear infinite;
+    font-size: 1.5rem;
+  }
+  @keyframes heartRise {
+    0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; }
+  }
+
+  /* ===== FLOATING CUTE ICONS LAYER ===== */
+  .cute-icons-layer {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden;
+  }
+  .cute-float {
+    position: absolute;
+    animation: cuteFloat linear infinite;
+    filter: drop-shadow(0 3px 8px rgba(0,0,0,0.06));
+    opacity: 0;
+  }
+  @keyframes cuteFloat {
+    0% { transform: translateY(105vh) rotate(-15deg) scale(0.7); opacity: 0; }
+    8% { opacity: 0.7; }
+    92% { opacity: 0.7; }
+    100% { transform: translateY(-15vh) rotate(15deg) scale(1); opacity: 0; }
+  }
+
+  /* ===== CAT SVG ===== */
+  .cat-svg { width: 55px; height: 55px; }
+  .cat-svg.small { width: 38px; height: 38px; }
+  .cat-svg.large { width: 72px; height: 72px; }
+  /* Paw print */
+  .paw-svg { width: 32px; height: 32px; opacity: 0.5; }
+  /* Bow */
+  .bow-svg { width: 36px; height: 36px; }
+
+  /* ===== INTRO SCREEN ===== */
+  .intro-screen {
+    position:fixed;inset:0;z-index:1000;
+    background:linear-gradient(135deg,#f5c6d0 0%,#e8a0bf 30%,#c97bb5 60%,#b07aac 100%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    transition:opacity .8s ease,transform .8s ease;
+    overflow: hidden;
+  }
+  .intro-screen.hidden { opacity:0;transform:scale(1.1);pointer-events:none; }
+  /* Intro cute cat */
+  .intro-cat {
+    animation: introCatBounce 1.2s ease infinite alternate;
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.15));
+  }
+  @keyframes introCatBounce { from{transform:translateY(0) rotate(-5deg)} to{transform:translateY(-20px) rotate(5deg)} }
+  .intro-text { color:#fff;font-family:-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-weight:700;font-size:1.6rem;margin-top:24px;text-shadow:0 2px 10px rgba(0,0,0,.15); }
+  .intro-subtext { color:rgba(255,255,255,0.7);font-family:-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-size:0.95rem;margin-top:8px; }
+  .intro-btn {
+    margin-top:35px;padding:18px 50px;
+    background:linear-gradient(135deg,#ff9a9e,#ff6b9d);color:#fff;border:none;border-radius:50px;
+    font-family:-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-weight:700;font-size:1.3rem;cursor:pointer;
+    box-shadow:0 8px 30px rgba(255,107,157,.4);transition:all .3s ease;animation:btnPulse 2s ease infinite;
+  }
+  .intro-btn:hover { transform:scale(1.1);box-shadow:0 12px 40px rgba(255,107,157,.5); }
+  @keyframes btnPulse { 0%,100%{box-shadow:0 8px 30px rgba(255,107,157,.4)} 50%{box-shadow:0 8px 50px rgba(255,107,157,.6)} }
+  /* Intro floating paws */
+  .intro-paw {
+    position: absolute; font-size: 2rem; opacity: 0.15;
+    animation: introPawFloat 6s ease-in-out infinite;
+  }
+  @keyframes introPawFloat {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(15deg); }
+  }
+
+  /* ===== PARTICLES CANVAS ===== */
+  #particles { position:fixed;inset:0;z-index:2;pointer-events:none; }
+
+  /* ===== MAIN CONTENT ===== */
+  .card-container {
+    position:relative;z-index:3;text-align:center;padding:40px 20px 60px;
+    opacity:0;transform:translateY(40px);transition:opacity 1s ease .5s,transform 1s ease .5s;
+  }
+  .card-container.show { opacity:1;transform:translateY(0); }
+
+  /* ===== BALLOONS ===== */
+  .balloons-container { position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:4; }
+  .balloon {
+    position:absolute;bottom:-150px;width:60px;height:75px;
+    border-radius:50% 50% 50% 50%/60% 60% 40% 40%;opacity:.85;
+    animation:floatUp linear forwards;filter:drop-shadow(0 4px 8px rgba(0,0,0,.1));
+  }
+  .balloon::after { content:'';position:absolute;bottom:-30px;left:50%;width:2px;height:30px;background:rgba(0,0,0,.2);transform:translateX(-50%); }
+  @keyframes floatUp { 0%{transform:translateY(0) rotate(0) scale(.8);opacity:0} 10%{opacity:.85;scale:1} 90%{opacity:.85} 100%{transform:translateY(-120vh) rotate(20deg);opacity:0} }
+
+  /* ===== CAT MASCOT ===== */
+  .mascot-area {
+    display: flex; justify-content: center; gap: 25px; margin-bottom: 10px;
+    animation: cakeAppear 1s ease 0.8s both;
+  }
+  .mascot-cat {
+    animation: mascotWiggle 2s ease-in-out infinite;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+  }
+  .mascot-cat:nth-child(2) { animation-delay: 0.3s; }
+  .mascot-cat:nth-child(3) { animation-delay: 0.6s; }
+  @keyframes mascotWiggle {
+    0%,100% { transform: rotate(-5deg) translateY(0); }
+    25% { transform: rotate(5deg) translateY(-5px); }
+    50% { transform: rotate(-3deg) translateY(0); }
+    75% { transform: rotate(4deg) translateY(-3px); }
+  }
+
+  /* ===== TITLE ===== */
+  .title-section { margin-bottom: 20px; }
+  .title-emoji { font-size:3rem;animation:emojiDance 1.5s ease infinite alternate;display:inline-block; }
+  @keyframes emojiDance { from{transform:rotate(-10deg) scale(1)} to{transform:rotate(10deg) scale(1.15)} }
+  .title-name {
+    font-family:-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-weight:700;font-size:clamp(2.2rem,6vw,3.8rem);
+    background:linear-gradient(135deg,#ff6b9d,#c471ed,#4facfe);background-size:200% auto;
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    animation:textShine 3s linear infinite;margin:10px 0;filter:drop-shadow(0 2px 4px rgba(0,0,0,.1));
+  }
+  @keyframes textShine { 0%{background-position:0% center} 100%{background-position:200% center} }
+  .title-sub { font-family:-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-weight:700;font-size:clamp(1.4rem,4vw,2.4rem);color:var(--pink);text-shadow:0 2px 8px rgba(255,107,157,.3);letter-spacing:2px; }
+
+  /* ===== CAKE ===== */
+  .cake-wrapper { display:flex;justify-content:center;margin:30px 0;animation:cakeAppear 1s ease 1.2s both; }
+  @keyframes cakeAppear { from{transform:scale(0) rotate(-10deg);opacity:0} to{transform:scale(1) rotate(0);opacity:1} }
+  .cake { position:relative;width:200px; }
+  .cake-top { width:160px;height:50px;background:linear-gradient(to bottom,#ffb6c1,#ff69b4);border-radius:12px 12px 0 0;position:relative;margin:0 auto; }
+  .cake-top::before { content:'';position:absolute;top:-8px;left:-5px;right:-5px;height:20px;background:linear-gradient(to bottom,#fff5f5,#ffccd5);border-radius:50% 50% 0 0; }
+  .cake-mid { width:180px;height:55px;background:linear-gradient(to bottom,#ffd1dc,#ffb6c1);margin:0 auto;position:relative; }
+  .cake-bottom { width:200px;height:60px;background:linear-gradient(to bottom,#ffe4e1,#ffd1dc);border-radius:0 0 16px 16px;margin:0 auto;position:relative; }
+  .frosting { position:absolute;top:-2px;left:-5px;right:-5px;height:18px;background:repeating-conic-gradient(#fff 0% 25%,#ffe4f0 0% 50%) 0 0/20px 20px;border-radius:0 0 10px 10px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.05)); }
+
+  .candles { display:flex;justify-content:center;gap:18px;position:absolute;top:-55px;left:50%;transform:translateX(-50%); }
+  .candle { width:8px;height:35px;background:linear-gradient(to right,var(--yellow),#ffec8b);border-radius:3px;position:relative; }
+  .candle:nth-child(2) { background:linear-gradient(to right,var(--pink),#ff9eb5); }
+  .candle:nth-child(3) { background:linear-gradient(to right,var(--sky),#a8d8ff); }
+  .flame { position:absolute;top:-16px;left:50%;transform:translateX(-50%);width:12px;height:16px;background:radial-gradient(ellipse at bottom,#ffdd57,#ff6b35,transparent);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;animation:flicker .3s ease-in-out infinite alternate; }
+  @keyframes flicker { 0%{transform:translateX(-50%) scale(1) rotate(-2deg);opacity:1} 100%{transform:translateX(-50%) scale(1.1) rotate(2deg);opacity:.85} }
+  .flame-glow { position:absolute;top:-25px;left:50%;transform:translateX(-50%);width:30px;height:30px;background:radial-gradient(circle,rgba(255,221,87,.4),transparent);border-radius:50%;animation:glowPulse 1s ease infinite alternate; }
+  @keyframes glowPulse { from{transform:translateX(-50%) scale(1);opacity:.6} to{transform:translateX(-50%) scale(1.3);opacity:.3} }
+
+  .cake-deco { position:absolute;font-size:1.2rem; }
+  .cake-deco.d1 { bottom:20px;left:15px;animation:decoSpin 3s ease infinite; }
+  .cake-deco.d2 { bottom:40px;right:10px;animation:decoSpin 3s ease .5s infinite; }
+  .cake-deco.d3 { bottom:60px;left:25px;animation:decoSpin 3s ease 1s infinite; }
+  @keyframes decoSpin { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3) rotate(15deg)} }
+
+  /* ===== MESSAGE CARD ===== */
+  .message-card {
+    max-width:520px;margin:20px auto;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);
+    border-radius:24px;padding:35px 30px;box-shadow:0 15px 50px rgba(255,107,157,.2),0 0 0 1px rgba(255,255,255,.5);
+    animation:cardFloat 4s ease infinite alternate;position:relative;overflow:hidden;
+  }
+  .message-card::before { content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(transparent,rgba(255,107,157,.05),transparent,rgba(196,113,237,.05),transparent);animation:cardShimmer 6s linear infinite; }
+  @keyframes cardShimmer { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+  @keyframes cardFloat { from{transform:translateY(0)} to{transform:translateY(-8px)} }
+  .message-text { position:relative;z-index:1;font-family:'STKaiti','KaiTi','PingFang SC','Hiragino Sans GB','Microsoft YaHei',serif;font-size:1.15rem;line-height:2;color:#5a4a6a; }
+  .message-text .highlight { color:var(--pink);font-weight:700; }
+  .message-en { position:relative;z-index:1;font-family:-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-size:.95rem;color:#b08db8;margin-top:15px;font-style:italic;letter-spacing:.5px; }
+  /* Cat paw watermark on card */
+  .card-paw-watermark {
+    position: absolute; bottom: 12px; right: 18px; opacity: 0.08; z-index: 0;
+  }
+
+  /* ===== CONFETTI ===== */
+  .confetti-piece { position:fixed;z-index:5;width:10px;height:25px;border-radius:3px;animation:confettiFall linear forwards;pointer-events:none; }
+  @keyframes confettiFall { 0%{transform:translateY(-10vh) rotate(0);opacity:1} 100%{transform:translateY(110vh) rotate(720deg);opacity:0} }
+
+  .footer { margin-top:30px;font-family:-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-size:.85rem;color:rgba(90,74,106,.5);animation:fadeIn 1s ease 2.5s both; }
+  .footer .paw-inline { vertical-align: middle; margin: 0 3px; }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+  .music-btn {
+    position:fixed;bottom:25px;right:25px;z-index:100;width:55px;height:55px;border-radius:50%;
+    background:linear-gradient(135deg,var(--pink),var(--purple));border:none;color:#fff;font-size:1.5rem;
+    cursor:pointer;box-shadow:0 5px 20px rgba(196,113,237,.4);transition:all .3s ease;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .music-btn:hover { transform:scale(1.1); }
+  .music-btn.playing { animation:musicPulse 1s ease infinite; }
+  @keyframes musicPulse { 0%,100%{box-shadow:0 5px 20px rgba(196,113,237,.4)} 50%{box-shadow:0 5px 35px rgba(196,113,237,.7)} }
+
+  .click-sparkle { position:fixed;pointer-events:none;z-index:999;font-size:1.5rem;animation:sparkPop .8s ease forwards; }
+  @keyframes sparkPop { 0%{transform:scale(0) rotate(0);opacity:1} 50%{transform:scale(1.2) rotate(180deg);opacity:1} 100%{transform:scale(0) rotate(360deg);opacity:0} }
+
+  .firework { position:fixed;z-index:5;pointer-events:none; }
+</style>
+</head>
+<body>
+
+<!-- ===== SVG DEFS (reusable cute graphics) ===== -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Cute Cat Face - Pink -->
+    <symbol id="cat-pink" viewBox="0 0 100 100">
+      <path d="M15,50 L25,15 L40,35 L60,35 L75,15 L85,50 Q85,90 50,92 Q15,90 15,50Z" fill="#ffb6c1" stroke="#f48fb1" stroke-width="2"/>
+      <circle cx="35" cy="52" r="7" fill="#4a4a4a"/><circle cx="65" cy="52" r="7" fill="#4a4a4a"/>
+      <circle cx="37" cy="50" r="2.5" fill="#fff"/><circle cx="67" cy="50" r="2.5" fill="#fff"/>
+      <ellipse cx="50" cy="62" rx="4" ry="3" fill="#f48fb1"/>
+      <path d="M46,65 Q50,70 54,65" stroke="#f48fb1" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <line x1="18" y1="55" x2="32" y2="56" stroke="#f48fb1" stroke-width="1" opacity="0.5"/>
+      <line x1="18" y1="60" x2="32" y2="59" stroke="#f48fb1" stroke-width="1" opacity="0.5"/>
+      <line x1="68" y1="56" x2="82" y2="55" stroke="#f48fb1" stroke-width="1" opacity="0.5"/>
+      <line x1="68" y1="59" x2="82" y2="60" stroke="#f48fb1" stroke-width="1" opacity="0.5"/>
+      <ellipse cx="30" cy="60" rx="8" ry="5" fill="rgba(255,150,170,0.35)"/>
+      <ellipse cx="70" cy="60" rx="8" ry="5" fill="rgba(255,150,170,0.35)"/>
+    </symbol>
+    <!-- Cute Cat Face - Purple -->
+    <symbol id="cat-purple" viewBox="0 0 100 100">
+      <path d="M15,50 L25,15 L40,35 L60,35 L75,15 L85,50 Q85,90 50,92 Q15,90 15,50Z" fill="#e1bee7" stroke="#ce93d8" stroke-width="2"/>
+      <path d="M32,52 Q35,48 38,52" stroke="#4a4a4a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M62,52 Q65,48 68,52" stroke="#4a4a4a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="50" cy="62" rx="4" ry="3" fill="#ce93d8"/>
+      <path d="M46,65 Q50,70 54,65" stroke="#ce93d8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <line x1="18" y1="55" x2="32" y2="56" stroke="#ce93d8" stroke-width="1" opacity="0.5"/>
+      <line x1="18" y1="60" x2="32" y2="59" stroke="#ce93d8" stroke-width="1" opacity="0.5"/>
+      <line x1="68" y1="56" x2="82" y2="55" stroke="#ce93d8" stroke-width="1" opacity="0.5"/>
+      <line x1="68" y1="59" x2="82" y2="60" stroke="#ce93d8" stroke-width="1" opacity="0.5"/>
+      <ellipse cx="30" cy="60" rx="8" ry="5" fill="rgba(206,147,216,0.3)"/>
+      <ellipse cx="70" cy="60" rx="8" ry="5" fill="rgba(206,147,216,0.3)"/>
+    </symbol>
+    <!-- Cute Cat Face - Yellow -->
+    <symbol id="cat-yellow" viewBox="0 0 100 100">
+      <path d="M15,50 L25,15 L40,35 L60,35 L75,15 L85,50 Q85,90 50,92 Q15,90 15,50Z" fill="#fff9c4" stroke="#ffcc02" stroke-width="2"/>
+      <circle cx="35" cy="52" r="6" fill="#4a4a4a"/><circle cx="65" cy="52" r="6" fill="#4a4a4a"/>
+      <circle cx="37" cy="50" r="2" fill="#fff"/><circle cx="67" cy="50" r="2" fill="#fff"/>
+      <ellipse cx="50" cy="62" rx="4" ry="3" fill="#ffb300"/>
+      <path d="M44,66 Q50,72 56,66" stroke="#ffb300" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <line x1="18" y1="55" x2="32" y2="56" stroke="#ffcc02" stroke-width="1" opacity="0.5"/>
+      <line x1="18" y1="60" x2="32" y2="59" stroke="#ffcc02" stroke-width="1" opacity="0.5"/>
+      <line x1="68" y1="56" x2="82" y2="55" stroke="#ffcc02" stroke-width="1" opacity="0.5"/>
+      <line x1="68" y1="59" x2="82" y2="60" stroke="#ffcc02" stroke-width="1" opacity="0.5"/>
+      <ellipse cx="30" cy="60" rx="8" ry="5" fill="rgba(255,204,2,0.25)"/>
+      <ellipse cx="70" cy="60" rx="8" ry="5" fill="rgba(255,204,2,0.25)"/>
+    </symbol>
+    <!-- Paw Print -->
+    <symbol id="paw" viewBox="0 0 50 50">
+      <ellipse cx="25" cy="32" rx="10" ry="12" fill="currentColor"/>
+      <circle cx="13" cy="18" r="6" fill="currentColor"/>
+      <circle cx="25" cy="13" r="6" fill="currentColor"/>
+      <circle cx="37" cy="18" r="6" fill="currentColor"/>
+    </symbol>
+    <!-- Bow / Ribbon -->
+    <symbol id="bow" viewBox="0 0 60 40">
+      <path d="M30,20 Q10,5 5,18 Q2,28 30,20Z" fill="#ff80ab"/>
+      <path d="M30,20 Q50,5 55,18 Q58,28 30,20Z" fill="#ff80ab"/>
+      <circle cx="30" cy="20" r="5" fill="#f50057"/>
+      <path d="M27,25 Q30,38 33,25" stroke="#f50057" stroke-width="2" fill="none"/>
+    </symbol>
+    <!-- Fish -->
+    <symbol id="fish" viewBox="0 0 50 30">
+      <ellipse cx="22" cy="15" rx="16" ry="10" fill="#80deea"/>
+      <polygon points="38,15 50,5 50,25" fill="#80deea"/>
+      <circle cx="15" cy="13" r="2.5" fill="#fff"/>
+      <circle cx="16" cy="13" r="1.2" fill="#4a4a4a"/>
+    </symbol>
+    <!-- Star -->
+    <symbol id="cute-star" viewBox="0 0 50 50">
+      <path d="M25,2 L31,18 L48,18 L34,28 L39,45 L25,35 L11,45 L16,28 L2,18 L19,18Z" fill="#ffd54f" stroke="#ffb300" stroke-width="1"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ===== RICH BACKGROUND ===== -->
+<div class="bg-layer" id="bgLayer"></div>
+
+<!-- ===== FLOATING CUTE ICONS ===== -->
+<div class="cute-icons-layer" id="cuteLayer"></div>
+
+<!-- ===== INTRO SCREEN ===== -->
+<div class="intro-screen" id="introScreen">
+  <!-- Scattered paws on intro -->
+  <div class="intro-paw" style="top:10%;left:8%;font-size:2.5rem;animation-delay:0s">🐾</div>
+  <div class="intro-paw" style="top:25%;right:12%;font-size:1.8rem;animation-delay:1s">🐾</div>
+  <div class="intro-paw" style="bottom:20%;left:15%;font-size:2rem;animation-delay:2s">🐾</div>
+  <div class="intro-paw" style="bottom:30%;right:8%;font-size:2.2rem;animation-delay:0.5s">🐾</div>
+  <div class="intro-paw" style="top:60%;left:5%;font-size:1.5rem;animation-delay:1.5s">🐾</div>
+  <div class="intro-paw" style="top:15%;right:30%;font-size:1.6rem;animation-delay:3s">💕</div>
+  <div class="intro-paw" style="bottom:15%;right:25%;font-size:1.4rem;animation-delay:2.5s">🎀</div>
+
+  <!-- Cute cat holding gift -->
+  <div class="intro-cat">
+    <svg width="120" height="140" viewBox="0 0 120 140">
+      <!-- Body -->
+      <ellipse cx="60" cy="105" r
